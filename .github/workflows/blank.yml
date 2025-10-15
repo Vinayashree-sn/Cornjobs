@@ -1,58 +1,18 @@
-name: Concurrent CI Pipeline-vina
-
+name: Daily Scheduled Workflow
 on:
   push:
-    branches: 
-     - vinayashree22
-
-concurrency: 
-  group: ${{ github.workflow }}-${{ github.ref_name }}
-  cancel-in-progress: true
+    branches:
+      - vinayashree
+  schedule:
+    - cron: '30 3 * * *'
 
 jobs:
-  lint:
-    name: Lint Code
-    runs-on: ubuntu-22.04
-    steps:
-      - uses: actions/checkout@v4
-      - name: Run linter
-        run: |
-          echo "Running linter..."
-          sleep 5
-          echo "Linting complete."
+  run-daily-task:
+    runs-on: ubuntu-latest
 
-  build:
-    name: Build Application
-    runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4
-      - name: Build
-        run: |
-          echo "Building application..."
-          sleep 8
-          echo "Build complete."
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-  package:
-    name: Package Artifacts
-    runs-on: ubuntu-22.04
-    needs: [lint, build]
-    steps:
-      - uses: actions/checkout@v4
-      - name: Package
-        run: |
-          echo "Packaging artifacts..."
-          sleep 6
-          echo "Packaging complete."
-
-  deploy:
-    name: Deploy to Staging
-    runs-on: ubuntu-22.04
-    needs: package
-    steps:
-      - uses: actions/checkout@v4
-      - name: Deploy
-        run: |
-          echo "Deploying to staging..."
-          sleep 5
-          echo "Deployment complete."
-
+      - name: Run a sample task
+        run: echo "Good morning! This workflow runs daily for each 3 hours"
