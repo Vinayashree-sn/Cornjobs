@@ -3,7 +3,7 @@ name: Daily Scheduled Workflow
 on:
   push:
     branches:
-      - vinayashree
+      - vinayashree22
   schedule:
     - cron: '30 3 * * *'
 
