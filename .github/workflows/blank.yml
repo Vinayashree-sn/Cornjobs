@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Print current UTC time
+        run: date -u
 
       - name: Run a sample task
         run: echo "Good morning! This workflow runs daily for each 3 hours"
